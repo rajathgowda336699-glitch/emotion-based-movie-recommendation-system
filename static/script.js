@@ -113,52 +113,55 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function renderCard(m) {
-        const safe = (s) => (s == null ? '' : String(s).replace(/[<>'"]/g, c => ({
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#39;'
-        }[c])));
+    const safe = (s) => (s == null ? '' : String(s).replace(/[<>'"]/g, c => ({
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+    }[c])));
 
-        const movieTitle = m.title || '';
+    const movieTitle = m.title || '';
 
-        const trailerUrl = m.trailer_url ||
-            `https://www.youtube.com/results?search_query=${encodeURIComponent(`${movieTitle} ${m.year || ''} official trailer`)}`;
+    const trailerUrl = m.trailer_url ||
+        `https://www.youtube.com/results?search_query=${encodeURIComponent(`${movieTitle} ${m.year || ''} official trailer`)}`;
 
-        const cinebyTitle = encodeURIComponent(movieTitle.trim()).replace(/%20/g, '+');
-        const watchUrl = `https://www.cineby.cc/search?keyword=${cinebyTitle}`;
+    const firstWord = movieTitle.trim().split(/\s+/)[0] || '';
+    const cinebyTitle = encodeURIComponent(firstWord);
+    const watchUrl = `https://cineby.cc/search?q=${cinebyTitle}`;
 
-        return `
-            <article class="movie-card" onclick="window.open('${safe(watchUrl)}', '_blank')">
-                <div class="poster-wrap">
-                    <img class="movie-poster" src="${safe(m.poster)}" alt="${safe(movieTitle)}"
-                         loading="lazy"
-                         onerror="this.onerror=null;this.src='https://via.placeholder.com/300x450?text=No+Poster'">
+    return `
+        <article class="movie-card" onclick="window.open('${safe(watchUrl)}', '_blank')">
+            <div class="poster-wrap">
+                <img class="movie-poster" src="${safe(m.poster)}" alt="${safe(movieTitle)}"
+                     loading="lazy"
+                     onerror="this.onerror=null;this.src='https://via.placeholder.com/300x450?text=No+Poster'">
+            </div>
+
+            <div class="movie-info">
+                <h3 class="movie-title">${safe(movieTitle)}</h3>
+
+                <p class="movie-meta">
+                    ${m.year ? `<span class="meta-chip">${safe(m.year)}</span>` : ''}
+                </p>
+
+                ${m.rating ? `<p class="movie-rating">&#9733; ${safe(m.rating)}</p>` : ''}
+
+                <div class="movie-actions">
+                    <button class="trailer-btn" type="button"
+                        onclick="event.stopPropagation(); window.open('${safe(trailerUrl)}', '_blank')">
+                        Trailer
+                    </button>
+
+                    <button class="watch-btn" type="button"
+                        onclick="event.stopPropagation(); window.open('${safe(watchUrl)}', '_blank')">
+                        Watch Now
+                    </button>
                 </div>
+            </div>
+        </article>
+    `;
+}
 
-                <div class="movie-info">
-                    <p class="movie-meta">
-                        ${m.genre ? `<span class="meta-chip">${safe(m.genre)}</span>` : ''}
-                        ${m.year ? `<span class="meta-chip">${safe(m.year)}</span>` : ''}
-                    </p>
-
-                    ${m.rating ? `<p class="movie-rating">⭐ ${safe(m.rating)}</p>` : ''}
-
-                    <div class="movie-actions">
-                        <button class="trailer-btn" type="button"
-                            onclick="event.stopPropagation(); window.open('${safe(trailerUrl)}', '_blank')">
-                            Trailer
-                        </button>
-
-                        <button class="watch-btn" type="button"
-                            onclick="event.stopPropagation(); window.open('${safe(watchUrl)}', '_blank')">
-                            Watch Now
-                        </button>
-                    </div>
-                </div>
-            </article>
-        `;
-    }
 
     function capitalize(s) {
         return s.charAt(0).toUpperCase() + s.slice(1);

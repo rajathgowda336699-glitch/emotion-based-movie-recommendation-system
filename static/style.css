@@ -754,23 +754,64 @@ body.excited-bg .particle {
 
 @media (max-width: 600px) {
     .landing-page {
-        padding: 22px;
-    }
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url("landing-bg.jpeg");
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
 
-    .landing-header {
-        align-items: flex-start;
-    }
+.landing-content {
+    text-align: center;
+    padding: 20px;
+}
 
-    .landing-nav {
-        display: none;
-    }
+.landing-content h1 {
+    font-size: 3.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+    color: #ffffff;
+    text-shadow: 0 0 18px rgba(255,255,255,0.9);
+}
 
-    .landing-content {
-        margin-top: 80px;
-    }
+.landing-subtitle {
+    font-size: 1.35rem;
+    color: rgba(255,255,255,0.88);
+    margin-bottom: 38px;
+}
 
+.start-btn {
+    border: 0;
+    background: linear-gradient(135deg, #ff5b70, #df2f34);
+    color: #ffffff;
+    padding: 18px 58px;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 1.15rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 14px 35px rgba(223,47,52,0.35);
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.start-btn:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.08);
+}
+
+@media (max-width: 700px) {
     .landing-content h1 {
-        font-size: 2.35rem;
+        font-size: 2.1rem;
     }
 
     .landing-subtitle {
@@ -779,8 +820,11 @@ body.excited-bg .particle {
 
     .start-btn {
         width: 100%;
+        max-width: 260px;
     }
 }
+}
+
 .movie-actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -825,112 +869,6 @@ body.excited-bg .particle {
     box-shadow: 0 12px 25px rgba(22,163,74,0.26);
 }
 .movie-info::after {
-    content: none !important;
-    display: none !important;
-}
-.movie-card {
-    display: flex !important;
-    flex-direction: column !important;
-    min-height: 492px;
-    text-align: left;
-}
-
-.poster-wrap {
-    position: relative !important;
-    width: 100% !important;
-    height: 330px;
-    flex-shrink: 0;
-}
-
-.movie-poster {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-}
-
-.poster-title-overlay {
-    position: absolute;
-    left: 14px;
-    right: 14px;
-    bottom: 18px;
-    z-index: 2;
-    color: #fff8c8;
-    font-size: clamp(1rem, 1.6vw, 1.35rem);
-    font-weight: 800;
-    line-height: 1.22;
-    letter-spacing: 0;
-    text-align: center;
-    text-shadow:
-        0 0 7px rgba(255,255,255,0.95),
-        0 0 14px rgba(255,244,150,0.78),
-        0 2px 8px rgba(0,0,0,0.9);
-    overflow-wrap: anywhere;
-}
-
-.movie-info {
-    display: flex !important;
-    flex: 1;
-    flex-direction: column;
-    padding: 15px;
-}
-
-.movie-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: auto !important;
-    padding-top: 12px;
-}
-
-.movie-info::after {
-    content: none !important;
-    display: none !important;
-}
-
-.movie-hover-panel {
-    display: none !important;
-}
-.placeholder-poster {
-    opacity: 0 !important;
-}
-.movie-card {
-    display: flex !important;
-    flex-direction: column !important;
-    min-height: 492px;
-    text-align: left;
-}
-
-.poster-wrap {
-    position: relative !important;
-    width: 100% !important;
-    height: 330px;
-    flex-shrink: 0;
-}
-
-.movie-poster {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-}
-
-.movie-info {
-    display: flex !important;
-    flex: 1;
-    flex-direction: column;
-    padding: 15px;
-}
-
-.movie-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: auto !important;
-    padding-top: 12px;
-}
-
-.movie-info::after,
-.movie-hover-panel,
-.poster-title-overlay {
     content: none !important;
     display: none !important;
 }
