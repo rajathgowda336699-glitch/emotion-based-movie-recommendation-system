@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Based Movie Recommendation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.12/dist/face-api.min.js"></script>
+</head>
+<body>
+    <div class="particles-container"></div>
+
+    <!-- First Page -->
+    <section id="landing-page" class="landing-page">
+        <header class="landing-header">
+            <div class="brand-name">Pick A Movie</div>
+            <nav class="landing-nav">
+                <span>Movie Picker</span>
+                <span>Genres</span>
+                <span>Trailers</span>
+            </nav>
+        </header>
+
+        <div class="landing-content">
+            <p class="landing-kicker">Movie Recommendation Engine</p>
+            <h1>Can’t decide what movie to watch?</h1>
+            <p class="landing-subtitle">
+                Choose your mood and language, then let the movie picker find something for you.
+            </p>
+
+            <ul class="landing-features">
+                <li>Easy to use</li>
+                <li>Free movie suggestions</li>
+                <li>Watch trailers directly</li>
+                <li>Recommendations by mood</li>
+            </ul>
+
+            <button id="start-app-btn" class="start-btn">Start Now</button>
+        </div>
+    </section>
+
+    <!-- Main App -->
+    <section id="main-app" class="main-app hidden">
+        <div class="app-container">
+            <h2 class="app-title">How are you feeling today?</h2>
+
+            <div class="webcam-section">
+                <div class="webcam-container">
+                    <video id="webcam" autoplay muted playsinline></video>
+                    <canvas id="face-canvas"></canvas>
+                    <div class="webcam-overlay" id="webcam-overlay">
+                        <span id="detection-status">Click below to enable camera</span>
+                    </div>
+                </div>
+                <button id="toggle-camera" class="camera-btn">Enable Camera</button>
+                <div id="detected-mood-display" class="detected-mood-display hidden">
+                    <span class="detected-label">Detected Mood:</span>
+                    <span id="detected-mood-text" class="detected-mood-text">--</span>
+                </div>
+                <p class="webcam-hint">Or pick your mood manually below</p>
+            </div>
+
+            <div class="mood-section">
+                <div class="mood-buttons">
+                    <button class="mood-btn" data-mood="happy"><span class="mood-emoji">😊</span><span class="mood-label">Happy</span></button>
+                    <button class="mood-btn" data-mood="sad"><span class="mood-emoji">😢</span><span class="mood-label">Sad</span></button>
+                    <button class="mood-btn" data-mood="angry"><span class="mood-emoji">😠</span><span class="mood-label">Angry</span></button>
+                    <button class="mood-btn" data-mood="relaxed"><span class="mood-emoji">😌</span><span class="mood-label">Relaxed</span></button>
+                    <button class="mood-btn" data-mood="excited"><span class="mood-emoji">🤩</span><span class="mood-label">Excited</span></button>
+                </div>
+            </div>
+
+            <div class="language-section">
+                <h3 class="section-title">Choose your language</h3>
+                <div class="language-buttons">
+                    <button class="lang-btn" data-language="English">English</button>
+                    <button class="lang-btn" data-language="Hindi">Hindi</button>
+                    <button class="lang-btn" data-language="Tamil">Tamil</button>
+                    <button class="lang-btn" data-language="Telugu">Telugu</button>
+                    <button class="lang-btn" data-language="Kannada">Kannada</button>
+                </div>
+            </div>
+
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <span>Loading movies...</span>
+            </div>
+
+            <section id="results-section" class="results-section hidden">
+                <h2 id="results-title" class="results-title"></h2>
+                <div id="movies-grid" class="movies-grid"></div>
+                <div class="pagination">
+                    <button id="prev-btn" class="page-btn">← Previous</button>
+                    <span id="page-info" class="page-info">Page 1 of 1</span>
+                    <button id="next-btn" class="page-btn">Next →</button>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
